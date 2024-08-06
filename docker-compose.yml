@@ -49,10 +49,6 @@ services:
     networks:
       - demo_bridge
 
-      
-
-
-
   # Conduktor Gateway, a Kafka proxy bringing many security and governance features.
   # In this get started, Gateway uses Apache Kafka as its backend Kafka cluster.
   # https://docs.conduktor.io/gateway/
