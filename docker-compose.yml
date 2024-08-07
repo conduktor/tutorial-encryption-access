@@ -14,23 +14,17 @@ services:
       - conduktor_data:/var/conduktor
     environment:
       CDK_DATABASE_URL: "postgresql://conduktor:change_me@postgresql:5432/conduktor-console"
-      CDK_CLUSTERS_0_ID: "local-kafka"
-      CDK_CLUSTERS_0_NAME: "local-kafka"
-      CDK_CLUSTERS_0_BOOTSTRAPSERVERS: "kafkabroker:9092"
+      CDK_CLUSTERS_0_ID: "cdk-gateway"
+      CDK_CLUSTERS_0_NAME: "cdk-gateway"
+      CDK_CLUSTERS_0_BOOTSTRAPSERVERS: "conduktor-gateway:6969"
       CDK_CLUSTERS_0_SCHEMAREGISTRY_URL: "http://kafkabroker:18081"
+      CDK_CLUSTERS_0_KAFKAFLAVOR_URL: "http://conduktor-gateway:8888"
+      CDK_CLUSTERS_0_KAFKAFLAVOR_USER: "admin"
+      CDK_CLUSTERS_0_KAFKAFLAVOR_PASSWORD: "conduktor"
+      CDK_CLUSTERS_0_KAFKAFLAVOR_VIRTUALCLUSTER: "passthrough"
+      CDK_CLUSTERS_0_KAFKAFLAVOR_TYPE: "Gateway"
       CDK_CLUSTERS_0_COLOR: "#6A57C8"
-      CDK_CLUSTERS_0_ICON: "kafka"
-      CDK_CLUSTERS_1_ID: "cdk-gateway"
-      CDK_CLUSTERS_1_NAME: "cdk-gateway"
-      CDK_CLUSTERS_1_BOOTSTRAPSERVERS: "conduktor-gateway:6969"
-      CDK_CLUSTERS_1_SCHEMAREGISTRY_URL: "http://kafkabroker:18081"
-      CDK_CLUSTERS_1_KAFKAFLAVOR_URL: "http://conduktor-gateway:8888"
-      CDK_CLUSTERS_1_KAFKAFLAVOR_USER: "admin"
-      CDK_CLUSTERS_1_KAFKAFLAVOR_PASSWORD: "conduktor"
-      CDK_CLUSTERS_1_KAFKAFLAVOR_VIRTUALCLUSTER: "passthrough"
-      CDK_CLUSTERS_1_KAFKAFLAVOR_TYPE: "Gateway"
-      CDK_CLUSTERS_1_COLOR: "#6A57C8"
-      CDK_CLUSTERS_1_ICON: "dog"
+      CDK_CLUSTERS_0_ICON: "dog"
       CDK_MONITORING_CORTEX-URL: http://conduktor-monitoring:9009/
       CDK_MONITORING_ALERT-MANAGER-URL: http://conduktor-monitoring:9010/
       CDK_MONITORING_CALLBACK-URL: http://conduktor-console:8080/monitoring/api/
@@ -54,10 +48,6 @@ services:
       POSTGRES_HOST_AUTH_METHOD: "scram-sha-256"
     networks:
       - demo_bridge
-
-      
-
-
 
   # Conduktor Gateway, a Kafka proxy bringing many security and governance features.
   # In this get started, Gateway uses Apache Kafka as its backend Kafka cluster.
